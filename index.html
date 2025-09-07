@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Encryption Tool</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🔐 Image Encryption & Decryption</h1>
+    
+    <form id="uploadForm">
+      <input type="file" id="fileInput" name="file" accept="image/*" required><br>
+      <input type="number" id="keyInput" name="key" placeholder="Enter key" required><br>
+      <button type="submit">Encrypt / Decrypt</button>
+    </form>
+  </div>
+  <div class="rules">
+      <h1>How to use</h1>
+      <h3 class="rul">Choose an Image</h3>
+      <p class="para">Click on “Choose File”.
+        Select the image you want to encrypt or decrypt (formats like .png, .jpg, .jpeg are supported).</p>
+      <h3 class="rul">Enter a Key</h3>
+      <p class="para">In the “Enter key” box, type any numeric key (e.g., 1234).
+        ⚠️ Remember this key, because you’ll need the same key to decrypt the image later.</p>
+      <h3 class="rul">Encrypt / Decrypt</h3>
+      <p class="para">Click the “Encrypt / Decrypt” button.
+        The system will process your image using the entered key.
+        Download the Result
+        A file named result.png will be downloaded automatically.
+        If you encrypted the image → the result will look scrambled.
+        If you decrypt it with the same key → you’ll get back the original image.</p>
+    </div>
+  
+  <script>
+    const form = document.getElementById("uploadForm");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      const file = document.getElementById("fileInput").files[0];
+      const key = parseInt(document.getElementById("keyInput").value);
+
+      if (!file || isNaN(key)) {
+        alert("Please select a file and enter a valid numeric key.");
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const data = new Uint8Array(e.target.result);
+
+        // XOR encryption/decryption
+        for (let i = 0; i < data.length; i++) {
+          data[i] = data[i] ^ key;
+        }
+
+        const blob = new Blob([data], { type: "application/octet-stream" });
+
+        // keep original filename
+        const link = document.createElement("a");
+        link.href = window.URL.createObjectURL(blob);
+        link.download = file.name; // same filename
+        link.click();
+
+        document.getElementById("message").innerText =
+          "✅ File processed. Save it in the same location to overwrite.";
+      };
+      reader.readAsArrayBuffer(file);
+    });
+  </script>
+</body>
+</html>

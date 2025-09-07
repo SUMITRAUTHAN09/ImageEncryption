@@ -1,0 +1,88 @@
+/* General Page Style */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container Card */
+.container, .rules{
+  width:400px;
+  height:500px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+  transition: transform 0.3s ease-in-out;
+}
+.rules{
+  height: auto;
+  margin: 20px;
+  text-align: left;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.container:hover ,.rules:hover{
+  transform: perspective(1000px) rotateX(0deg) scale(1.03);
+  color:red;
+}
+
+/* Title */
+h1 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  text-shadow: 3px 3px 10px rgba(0,0,0,0.6);
+}
+
+/* Form Elements */
+input[type="file"], input[type="number"] {
+  margin: 12px;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  width: 80%;
+  box-shadow: inset 3px 3px 6px rgba(8, 8, 8, 0.3),
+              inset -3px -3px 6px rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.15);
+  color: white;
+}
+
+/* Button */
+button {
+  margin: 15px;
+  padding: 14px 35px;
+  font-size: 18px;
+  font-weight: bold;
+  background: linear-gradient(145deg, #ff416c, #ff4b2b);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  transition: all 0.25s ease-in-out;
+}
+
+button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.8);
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Status Message */
+#message {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.7);
+}
